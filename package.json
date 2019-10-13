@@ -1,0 +1,48 @@
+{
+  "name": "turms-client-js",
+  "version": "0.8.0-beta",
+  "sideEffects": false,
+  "scripts": {
+    "protoc": "pbjs --force-number --no-create --no-verify --no-convert --no-delimited -t static-module -w commonjs -o ./src/model/proto-bundle.js ./src/proto/**/*.proto & pbts -o ./src/model/proto-bundle.d.ts ./src/model/proto-bundle.js",
+    "webpack": "webpack --mode=production",
+    "test": "jest",
+    "build": "npm run protoc && npm run webpack",
+    "analyze": "npm run protoc && webpack --mode=production --report=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turms-im/turms-client-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/turms-im/turms-client-js/issues"
+  },
+  "homepage": "https://github.com/turms-im/turms-client-js#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "core-js": "3",
+    "protobufjs": "^6.8.8",
+    "websocket-as-promised": "^0.10.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "terser-webpack-plugin": "^2.1.2",
+    "ts-jest": "^24.1.0",
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.7.0-beta",
+    "webpack": "^4.41.0",
+    "webpack-bundle-analyzer": "^3.5.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "description": "turms-client-js"
+}

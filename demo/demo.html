@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../dist/turms-client.js"></script>
+    <script>
+        const client = new TurmsClient('ws://localhost:9510');
+        client.driver.onClose = (wasLogged, error) => {
+            if (wasLogged) {
+                console.info('onClose: wasLogged = ' + wasLogged);
+                if (error) {
+                    console.error(error);
+                } else {
+                    console.info('onClose: bye bye');
+                }
+            }
+        };
+        client.driver.onMessage = (response) => {
+            if (response.data && response.data.notification) {
+                console.log('onMessage: Received: ' + JSON.stringify(response));
+            }
+        };
+        client.userService.login(0, '123')
+            .then(() => {
+                    console.info('login: Login Successful');
+                    client.messageService.queryMessages('PRIVATE', null, null, null, 'READY')
+                        .then(messages => {
+                            console.info('Offline messages')
+                        })
+                        .catch(error => {
+                            if (error && error.code === 2001) {
+                                console.info('No offline message')
+                            }
+                        });
+                    client.messageService.sendMessage(
+                        "PRIVATE",
+                        1,
+                        new Date(),
+                        "Hello Turms",
+                        null,
+                        30)
+                        .then(id => {
+                            console.info('message ' + id + ' has been sent');
+                        })
+                        .catch(error => {
+                            console.info('failed to send message:' + JSON.stringify(error));
+                        });
+                    client.groupService.createGroup(
+                        'Turms Developers Group',
+                        'This is a group for the developers who are interested in Turms',
+                        'nope',
+                        null,
+                        null)
+                        .then(id => {
+                            console.info('group ' + id + ' has been created');
+                        })
+                        .catch(error => {
+                            console.info('failed to create group:' + JSON.stringify(error));
+                        });
+                }
+            )
+            .catch(reason => {
+                console.error(reason);
+            });
+    </script>
+</head>
+<body>
+</body>
+</html>
