@@ -5040,6 +5040,8 @@ $root.im = (function() {
                  * @interface ICreateGroupMemberRequest
                  * @property {number|null} [groupId] CreateGroupMemberRequest groupId
                  * @property {number|null} [userId] CreateGroupMemberRequest userId
+                 * @property {google.protobuf.IStringValue|null} [name] CreateGroupMemberRequest name
+                 * @property {im.turms.proto.GroupMemberRole|null} [role] CreateGroupMemberRequest role
                  * @property {google.protobuf.IInt64Value|null} [muteEndDate] CreateGroupMemberRequest muteEndDate
                  */
 
@@ -5075,6 +5077,22 @@ $root.im = (function() {
                 CreateGroupMemberRequest.prototype.userId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
                 /**
+                 * CreateGroupMemberRequest name.
+                 * @member {google.protobuf.IStringValue|null|undefined} name
+                 * @memberof im.turms.proto.CreateGroupMemberRequest
+                 * @instance
+                 */
+                CreateGroupMemberRequest.prototype.name = null;
+
+                /**
+                 * CreateGroupMemberRequest role.
+                 * @member {im.turms.proto.GroupMemberRole} role
+                 * @memberof im.turms.proto.CreateGroupMemberRequest
+                 * @instance
+                 */
+                CreateGroupMemberRequest.prototype.role = 0;
+
+                /**
                  * CreateGroupMemberRequest muteEndDate.
                  * @member {google.protobuf.IInt64Value|null|undefined} muteEndDate
                  * @memberof im.turms.proto.CreateGroupMemberRequest
@@ -5098,8 +5116,12 @@ $root.im = (function() {
                         writer.uint32(/* id 1, wireType 0 =*/8).int64(message.groupId);
                     if (message.userId != null && message.hasOwnProperty("userId"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int64(message.userId);
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        $root.google.protobuf.StringValue.encode(message.name, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.role != null && message.hasOwnProperty("role"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.role);
                     if (message.muteEndDate != null && message.hasOwnProperty("muteEndDate"))
-                        $root.google.protobuf.Int64Value.encode(message.muteEndDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.protobuf.Int64Value.encode(message.muteEndDate, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
 
@@ -5128,6 +5150,12 @@ $root.im = (function() {
                             message.userId = reader.int64();
                             break;
                         case 3:
+                            message.name = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.role = reader.int32();
+                            break;
+                        case 5:
                             message.muteEndDate = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
                             break;
                         default:

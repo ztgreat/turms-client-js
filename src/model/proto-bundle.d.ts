@@ -2286,6 +2286,12 @@ export namespace im {
                 /** CreateGroupMemberRequest userId */
                 userId?: (number|null);
 
+                /** CreateGroupMemberRequest name */
+                name?: (google.protobuf.IStringValue|null);
+
+                /** CreateGroupMemberRequest role */
+                role?: (im.turms.proto.GroupMemberRole|null);
+
                 /** CreateGroupMemberRequest muteEndDate */
                 muteEndDate?: (google.protobuf.IInt64Value|null);
             }
@@ -2304,6 +2310,12 @@ export namespace im {
 
                 /** CreateGroupMemberRequest userId. */
                 public userId: number;
+
+                /** CreateGroupMemberRequest name. */
+                public name?: (google.protobuf.IStringValue|null);
+
+                /** CreateGroupMemberRequest role. */
+                public role: im.turms.proto.GroupMemberRole;
 
                 /** CreateGroupMemberRequest muteEndDate. */
                 public muteEndDate?: (google.protobuf.IInt64Value|null);

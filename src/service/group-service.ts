@@ -289,12 +289,22 @@ export default class GroupService {
     }
 
     // Group Member
-    addGroupMember(groupId: number, userId: number, muteEndDate?: Date): Promise<void> {
+    addGroupMember(
+        groupId: number,
+        userId: number,
+        name?: string,
+        role?: string | GroupMemberRole,
+        muteEndDate?: Date): Promise<void> {
         RequestUtil.throwIfAnyFalsy(groupId, userId);
+        if (typeof role === 'string') {
+            role = ConstantTransformer.string2GroupMemberRole(role);
+        }
         return this._turmsClient.driver.send({
             createGroupMemberRequest: {
                 groupId,
                 userId,
+                name: RequestUtil.getIfNotNull(name),
+                role: role,
                 muteEndDate: RequestUtil.getTimeIfNotNull(muteEndDate)
             }
         }).then();
