@@ -6020,10 +6020,11 @@ $root.im = (function() {
                  * Properties of a CreateMessageRequest.
                  * @memberof im.turms.proto
                  * @interface ICreateMessageRequest
+                 * @property {google.protobuf.IInt64Value|null} [messageId] CreateMessageRequest messageId
                  * @property {im.turms.proto.ChatType|null} [chatType] CreateMessageRequest chatType
                  * @property {number|null} [toId] CreateMessageRequest toId
                  * @property {number|null} [deliveryDate] CreateMessageRequest deliveryDate
-                 * @property {string|null} [text] CreateMessageRequest text
+                 * @property {google.protobuf.IStringValue|null} [text] CreateMessageRequest text
                  * @property {Array.<Uint8Array>|null} [records] CreateMessageRequest records
                  * @property {google.protobuf.IInt32Value|null} [burnAfter] CreateMessageRequest burnAfter
                  */
@@ -6043,6 +6044,14 @@ $root.im = (function() {
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+
+                /**
+                 * CreateMessageRequest messageId.
+                 * @member {google.protobuf.IInt64Value|null|undefined} messageId
+                 * @memberof im.turms.proto.CreateMessageRequest
+                 * @instance
+                 */
+                CreateMessageRequest.prototype.messageId = null;
 
                 /**
                  * CreateMessageRequest chatType.
@@ -6070,11 +6079,11 @@ $root.im = (function() {
 
                 /**
                  * CreateMessageRequest text.
-                 * @member {string} text
+                 * @member {google.protobuf.IStringValue|null|undefined} text
                  * @memberof im.turms.proto.CreateMessageRequest
                  * @instance
                  */
-                CreateMessageRequest.prototype.text = "";
+                CreateMessageRequest.prototype.text = null;
 
                 /**
                  * CreateMessageRequest records.
@@ -6104,19 +6113,21 @@ $root.im = (function() {
                 CreateMessageRequest.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.messageId != null && message.hasOwnProperty("messageId"))
+                        $root.google.protobuf.Int64Value.encode(message.messageId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.chatType != null && message.hasOwnProperty("chatType"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.chatType);
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.chatType);
                     if (message.toId != null && message.hasOwnProperty("toId"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.toId);
+                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.toId);
                     if (message.deliveryDate != null && message.hasOwnProperty("deliveryDate"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.deliveryDate);
+                        writer.uint32(/* id 4, wireType 0 =*/32).int64(message.deliveryDate);
                     if (message.text != null && message.hasOwnProperty("text"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.text);
+                        $root.google.protobuf.StringValue.encode(message.text, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     if (message.records != null && message.records.length)
                         for (var i = 0; i < message.records.length; ++i)
-                            writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.records[i]);
+                            writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.records[i]);
                     if (message.burnAfter != null && message.hasOwnProperty("burnAfter"))
-                        $root.google.protobuf.Int32Value.encode(message.burnAfter, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        $root.google.protobuf.Int32Value.encode(message.burnAfter, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     return writer;
                 };
 
@@ -6139,23 +6150,26 @@ $root.im = (function() {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            message.chatType = reader.int32();
+                            message.messageId = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
                             break;
                         case 2:
-                            message.toId = reader.int64();
+                            message.chatType = reader.int32();
                             break;
                         case 3:
-                            message.deliveryDate = reader.int64();
+                            message.toId = reader.int64();
                             break;
                         case 4:
-                            message.text = reader.string();
+                            message.deliveryDate = reader.int64();
                             break;
                         case 5:
+                            message.text = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                            break;
+                        case 6:
                             if (!(message.records && message.records.length))
                                 message.records = [];
                             message.records.push(reader.bytes());
                             break;
-                        case 6:
+                        case 7:
                             message.burnAfter = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
                             break;
                         default:

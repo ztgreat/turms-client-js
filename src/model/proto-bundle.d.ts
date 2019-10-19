@@ -2722,6 +2722,9 @@ export namespace im {
             /** Properties of a CreateMessageRequest. */
             interface ICreateMessageRequest {
 
+                /** CreateMessageRequest messageId */
+                messageId?: (google.protobuf.IInt64Value|null);
+
                 /** CreateMessageRequest chatType */
                 chatType?: (im.turms.proto.ChatType|null);
 
@@ -2732,7 +2735,7 @@ export namespace im {
                 deliveryDate?: (number|null);
 
                 /** CreateMessageRequest text */
-                text?: (string|null);
+                text?: (google.protobuf.IStringValue|null);
 
                 /** CreateMessageRequest records */
                 records?: (Uint8Array[]|null);
@@ -2750,6 +2753,9 @@ export namespace im {
                  */
                 constructor(properties?: im.turms.proto.ICreateMessageRequest);
 
+                /** CreateMessageRequest messageId. */
+                public messageId?: (google.protobuf.IInt64Value|null);
+
                 /** CreateMessageRequest chatType. */
                 public chatType: im.turms.proto.ChatType;
 
@@ -2760,7 +2766,7 @@ export namespace im {
                 public deliveryDate: number;
 
                 /** CreateMessageRequest text. */
-                public text: string;
+                public text?: (google.protobuf.IStringValue|null);
 
                 /** CreateMessageRequest records. */
                 public records: Uint8Array[];

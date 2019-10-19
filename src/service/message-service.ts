@@ -23,10 +23,11 @@ export default class MessageService {
         chatType: string | ChatType,
         toId: number,
         deliveryDate: Date,
-        text: string,
+        text?: string,
         records?: Uint8Array[],
         burnAfter?: number): Promise<number> {
-        RequestUtil.throwIfAnyFalsy(chatType, toId, deliveryDate, text);
+        RequestUtil.throwIfAnyFalsy(chatType, toId, deliveryDate);
+        RequestUtil.throwIfAllFalsy(text, records);
         if (typeof chatType === "string") {
             chatType = ConstantTransformer.string2ChatType(chatType);
         }
@@ -35,11 +36,28 @@ export default class MessageService {
                 chatType,
                 toId,
                 deliveryDate: deliveryDate.getTime(),
-                text,
+                text: RequestUtil.getIfNotNull(text),
                 records: records,
                 burnAfter: RequestUtil.getIfNotNull(burnAfter)
             }
-        }).then(response => response.data.ids && response.data.ids[0]);
+        }).then(response => ResponseUtil.getFirstIdFromIds(response));
+    }
+
+    forwardMessage(
+        messageId: number,
+        chatType: string | ChatType,
+        toId: number): Promise<number> {
+        RequestUtil.throwIfAnyFalsy(messageId, chatType, toId);
+        if (typeof chatType === "string") {
+            chatType = ConstantTransformer.string2ChatType(chatType);
+        }
+        return this._turmsClient.driver.send({
+            createMessageRequest: {
+                messageId: {value: messageId},
+                chatType,
+                toId
+            }
+        }).then(response => ResponseUtil.getFirstIdFromIds(response));
     }
 
     updateSentMessage(
