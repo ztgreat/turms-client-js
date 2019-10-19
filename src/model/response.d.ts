@@ -51,12 +51,12 @@ declare namespace Response {
 
     interface Message {
         id?: number;
-        chatType?: ChatType;
         deliveryDate?: Date;
         deletionDate?: Date;
         text?: string;
-        fromId?: number;
-        toId?: number;
+        senderId?: number;
+        groupId?: number;
+        recipientId?: number;
         records?: Uint8Array[];
     }
 

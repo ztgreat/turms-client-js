@@ -92,14 +92,14 @@ export default class MessageService {
         }).then(response => ResponseUtil.getFirstArrayAndTransform(response.data.messagesWithTotalList));
     }
 
-    queryMessageStatus(messageId: number): Promise<Response.MessageStatus> {
+    queryMessageStatus(messageId: number): Promise<Response.MessageStatus[]> {
         RequestUtil.throwIfAnyFalsy(messageId);
         // @ts-ignore
         return this._turmsClient.driver.send({
-            queryMessageStatusRequest: {
+            queryMessageStatusesRequest: {
                 messageId
             }
-        }).then(response => ResponseUtil.transform(response.data.messageStatus));
+        }).then(response => ResponseUtil.transform(response.data.messageStatuses));
     }
 
     recallMessage(messageId: number, recallDate = new Date()): Promise<void> {
