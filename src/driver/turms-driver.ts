@@ -22,12 +22,16 @@ export default class TurmsDriver {
     private _url = 'ws://localhost:9510';
     private _connectionTimeout = 10 * 1000;
     private _requestTimeout = 60 * 1000;
+    private _minRequestsInterval = 1000;
     private _requestsMap: Set<number>;
+    private _lastRequestDate = new Date(0);
+    private _isLastRequestHeartbeat = false;
 
-    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number) {
+    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number, minRequestsInterval?: number) {
         if (url) this._url = url;
         if (connectionTimeout) this._connectionTimeout = connectionTimeout;
         if (requestTimeout) this._requestTimeout = requestTimeout;
+        if (minRequestsInterval) this._minRequestsInterval = minRequestsInterval;
         this._heartbeatInterval = HEARTBEAT_INTERVAL;
         this._requestsMap = new Set();
     }
@@ -43,6 +47,7 @@ export default class TurmsDriver {
     sendHeartbeat(): Promise<void> {
         return new Promise((resolve, reject): void => {
             if (this.connected()) {
+                this.setLastRequestRecord(true, new Date());
                 this._websocket.send(new Uint8Array(0));
                 resolve();
             } else {
@@ -117,21 +122,40 @@ export default class TurmsDriver {
         }
     }
 
+    private setLastRequestRecord(isLastRequestHeartbeat: boolean, lastRequestDate: Date) {
+        this._isLastRequestHeartbeat = isLastRequestHeartbeat;
+        this._lastRequestDate = lastRequestDate;
+    }
+
     send(message: im.turms.proto.ITurmsRequest): Promise<TurmsResponse> {
         if (this.connected()) {
-            const requestId = this._generateRandomId();
-            message.requestId = {value: requestId};
-            const data = TurmsRequest.encode(message).finish();
-            this.resetHeartBeatTimer();
-            return this._websocket.sendRequest(data, {
-                requestId: requestId
-            }).then((response: TurmsResponse) => {
-                if (response.code && TurmsStatusCode.isErrorCode(response.code)) {
-                    throw TurmsError.fromResponse(response);
-                } else {
-                    return response;
-                }
-            });
+            const now = new Date();
+            if (now.getTime() - this._lastRequestDate.getTime() > this._minRequestsInterval) {
+                this.setLastRequestRecord(false, now);
+                const requestId = this._generateRandomId();
+                message.requestId = {value: requestId};
+                const data = TurmsRequest.encode(message).finish();
+                this.resetHeartBeatTimer();
+                return this._websocket.sendRequest(data, {
+                    requestId: requestId
+                }).then((response: TurmsResponse) => {
+                    if (response.code && TurmsStatusCode.isErrorCode(response.code)) {
+                        throw TurmsError.fromResponse(response);
+                    } else {
+                        return response;
+                    }
+                });
+            } else if (this._isLastRequestHeartbeat) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        this.send(message)
+                            .then(response => resolve(response))
+                            .catch(error => reject(error));
+                    }, this._minRequestsInterval);
+                })
+            } else {
+                return Promise.reject("Request is too frequent");
+            }
         } else {
             return Promise.reject("The WebSocket is closed");
         }
@@ -151,7 +175,12 @@ export default class TurmsDriver {
             this._heartbeatTimer.reset(this._heartbeatInterval);
         } else {
             this._heartbeatTimer = new Timer((): Promise<void> => {
-                return this.sendHeartbeat();
+                const difference = new Date().getTime() - this._lastRequestDate.getTime();
+                if (difference > this._minRequestsInterval) {
+                    return this.sendHeartbeat();
+                } else {
+                    return Promise.reject();
+                }
             }, this._heartbeatInterval);
             this._heartbeatTimer.start();
         }

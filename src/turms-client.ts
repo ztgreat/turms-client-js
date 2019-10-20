@@ -11,8 +11,8 @@ class TurmsClient {
     private readonly _groupService: GroupService;
     private readonly _messageService: MessageService;
 
-    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number) {
-        this._driver = new TurmsDriver(url, connectionTimeout, requestTimeout);
+    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number, minRequestsInterval = 1000) {
+        this._driver = new TurmsDriver(url, connectionTimeout, requestTimeout, minRequestsInterval);
         this._userService = new UserService(this);
         this._groupService = new GroupService(this);
         this._messageService = new MessageService(this);
