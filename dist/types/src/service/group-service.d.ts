@@ -29,7 +29,7 @@ export default class GroupService {
     queryJoinRequests(groupId: number, lastUpdatedDate?: Date): Promise<Response.GroupJoinRequestsWithVersion>;
     queryGroupJoinQuestionsRequest(groupId: number, withAnswers?: boolean, lastUpdatedDate?: Date): Promise<Response.GroupJoinQuestionsWithVersion>;
     answerGroupQuestion(questionId: number, answer: string): Promise<boolean>;
-    addGroupMember(groupId: number, userId: number, muteEndDate?: Date): Promise<void>;
+    addGroupMember(groupId: number, userId: number, name?: string, role?: string | GroupMemberRole, muteEndDate?: Date): Promise<void>;
     quitGroup(groupId: number, successorId?: number, quitAfterTransfer?: boolean): Promise<void>;
     removeGroupMember(groupId: number, memberId: number): Promise<void>;
     updateGroupMemberInfo(groupId: number, memberId: number, name?: string, role?: string | GroupMemberRole, muteEndDate?: Date): Promise<void>;

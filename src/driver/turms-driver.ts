@@ -22,7 +22,7 @@ export default class TurmsDriver {
     private _url = 'ws://localhost:9510';
     private _connectionTimeout = 10 * 1000;
     private _requestTimeout = 60 * 1000;
-    private _minRequestsInterval = 1000;
+    private _minRequestsInterval = 0;
     private _requestsMap: Set<number>;
     private _lastRequestDate = new Date(0);
     private _isLastRequestHeartbeat = false;
@@ -130,7 +130,7 @@ export default class TurmsDriver {
     send(message: im.turms.proto.ITurmsRequest): Promise<TurmsResponse> {
         if (this.connected()) {
             const now = new Date();
-            if (now.getTime() - this._lastRequestDate.getTime() > this._minRequestsInterval) {
+            if (!this._minRequestsInterval || now.getTime() - this._lastRequestDate.getTime() > this._minRequestsInterval) {
                 this.setLastRequestRecord(false, now);
                 const requestId = this._generateRandomId();
                 message.requestId = {value: requestId};

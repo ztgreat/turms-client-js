@@ -8,7 +8,7 @@ declare class TurmsClient {
     private readonly _userService;
     private readonly _groupService;
     private readonly _messageService;
-    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number);
+    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number, minRequestsInterval?: number);
     get driver(): TurmsDriver;
     get userService(): UserService;
     get groupService(): GroupService;

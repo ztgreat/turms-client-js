@@ -6,11 +6,12 @@ import MessageDeliveryStatus = im.turms.proto.MessageDeliveryStatus;
 export default class MessageService {
     private _turmsClient;
     constructor(turmsClient: TurmsClient);
-    sendMessage(chatType: string | ChatType, toId: number, deliveryDate: Date, text: string, records?: Uint8Array[], burnAfter?: number): Promise<number>;
+    sendMessage(chatType: string | ChatType, toId: number, deliveryDate: Date, text?: string, records?: Uint8Array[], burnAfter?: number): Promise<number>;
+    forwardMessage(messageId: number, chatType: string | ChatType, toId: number): Promise<number>;
     updateSentMessage(messageId: number, text?: string, records?: Uint8Array[]): Promise<void>;
     queryMessages(chatType?: string | ChatType, fromId?: number, deliveryDateAfter?: Date, deliveryDateBefore?: Date, deliveryStatus?: string | MessageDeliveryStatus, size?: number): Promise<Response.Message[]>;
     queryPendingMessagesWithTotal(size?: number): Promise<Response.MessagesWithTotal[]>;
-    queryMessageStatus(messageId: number): Promise<Response.MessageStatus>;
+    queryMessageStatus(messageId: number): Promise<Response.MessageStatus[]>;
     recallMessage(messageId: number, recallDate?: Date): Promise<void>;
     readMessage(messageId: number, readDate?: Date): Promise<void>;
     updateTypingStatusRequest(chatType: string | ChatType, toId: number): Promise<void>;

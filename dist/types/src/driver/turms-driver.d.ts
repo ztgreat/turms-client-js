@@ -9,8 +9,11 @@ export default class TurmsDriver {
     private _url;
     private _connectionTimeout;
     private _requestTimeout;
+    private _minRequestsInterval;
     private _requestsMap;
-    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number);
+    private _lastRequestDate;
+    private _isLastRequestHeartbeat;
+    constructor(url?: string, connectionTimeout?: number, requestTimeout?: number, minRequestsInterval?: number);
     set onClose(value: any);
     set onMessage(value: any);
     sendHeartbeat(): Promise<void>;
@@ -18,6 +21,7 @@ export default class TurmsDriver {
     disconnect(): Promise<CloseEvent>;
     connect(url?: string, connectionTimeout?: number, requestTimeout?: number): Promise<void>;
     resetHeartBeatTimer(): void;
+    private setLastRequestRecord;
     send(message: im.turms.proto.ITurmsRequest): Promise<TurmsResponse>;
     private _generateRandomId;
     private _onWebsocketOpen;
