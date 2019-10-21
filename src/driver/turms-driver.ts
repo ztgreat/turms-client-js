@@ -97,11 +97,6 @@ export default class TurmsDriver {
                     this._onMessage(response);
                 }
             });
-            // this._websocket.onMessage.addListener((response: TurmsResponse) => {
-            //     if (this._onMessage) {
-            //         this._onMessage(response);
-            //     }
-            // });
             this._websocket.onClose.addListener(() => {
                 this._onWebsocketClose();
             });
