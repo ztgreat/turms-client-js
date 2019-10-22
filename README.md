@@ -51,7 +51,7 @@ client.driver.onMessage = (response) => {
     }
 };
 
-client.userService.login(0, "123")
+client.userService.login(1, "123")
     .then(() => {
     	client.userService.queryUsersIdsNearby(
             139.667651,

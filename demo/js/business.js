@@ -27,8 +27,8 @@ function beautify(object) {
 function start() {
     const clientUserOne = new TurmsClient('ws://localhost:9510');
     const clientUserTwo = new TurmsClient('ws://localhost:9510');
-    const USER_ONE_ID = 0;
-    const USER_TWO_ID = 1;
+    const USER_ONE_ID = 1;
+    const USER_TWO_ID = 2;
     clientUserOne.driver.onClose = (wasLogged, error) => {
         if (wasLogged) {
             appendUserOneContainer('onClose: wasLogged = ' + wasLogged);
@@ -79,7 +79,7 @@ function start() {
                     "PRIVATE",
                     USER_TWO_ID,
                     new Date(),
-                    "Hello Turms, My userId is 0",
+                    "Hello Turms, My userId is " + USER_ONE_ID,
                     null,
                     30)
                     .then(id => {
@@ -113,7 +113,7 @@ function start() {
                     "PRIVATE",
                     USER_ONE_ID,
                     new Date(),
-                    "Hello Community, My userId is 1",
+                    "Hello Community, My userId is " + USER_TWO_ID,
                     null,
                     30)
                     .then(id => {
