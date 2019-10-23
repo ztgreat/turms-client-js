@@ -3087,9 +3087,6 @@ export namespace im {
                 /** TurmsRequest requestId */
                 requestId?: (google.protobuf.IInt64Value|null);
 
-                /** TurmsRequest requesterId */
-                requesterId?: (google.protobuf.IInt64Value|null);
-
                 /** TurmsRequest ackRequest */
                 ackRequest?: (im.turms.proto.IAckRequest|null);
 
@@ -3258,9 +3255,6 @@ export namespace im {
 
                 /** TurmsRequest requestId. */
                 public requestId?: (google.protobuf.IInt64Value|null);
-
-                /** TurmsRequest requesterId. */
-                public requesterId?: (google.protobuf.IInt64Value|null);
 
                 /** TurmsRequest ackRequest. */
                 public ackRequest?: (im.turms.proto.IAckRequest|null);
@@ -4694,50 +4688,6 @@ export namespace im {
                 public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): im.turms.proto.GroupMembersWithVersion;
             }
 
-            /** Properties of a GroupWithVersion. */
-            interface IGroupWithVersion {
-
-                /** GroupWithVersion lastUpdatedDate */
-                lastUpdatedDate?: (number|null);
-
-                /** GroupWithVersion group */
-                group?: (im.turms.proto.IGroup[]|null);
-            }
-
-            /** Represents a GroupWithVersion. */
-            class GroupWithVersion implements IGroupWithVersion {
-
-                /**
-                 * Constructs a new GroupWithVersion.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: im.turms.proto.IGroupWithVersion);
-
-                /** GroupWithVersion lastUpdatedDate. */
-                public lastUpdatedDate: number;
-
-                /** GroupWithVersion group. */
-                public group: im.turms.proto.IGroup[];
-
-                /**
-                 * Encodes the specified GroupWithVersion message. Does not implicitly {@link im.turms.proto.GroupWithVersion.verify|verify} messages.
-                 * @param message GroupWithVersion message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: im.turms.proto.IGroupWithVersion, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a GroupWithVersion message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns GroupWithVersion
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): im.turms.proto.GroupWithVersion;
-            }
-
             /** Properties of a GroupsWithVersion. */
             interface IGroupsWithVersion {
 
@@ -4913,6 +4863,9 @@ export namespace im {
 
                 /** TurmsResponse notification */
                 notification?: (im.turms.proto.ITurmsRequest|null);
+
+                /** TurmsResponse requesterId */
+                requesterId?: (google.protobuf.IInt64Value|null);
             }
 
             /** Represents a TurmsResponse. */
@@ -4938,6 +4891,9 @@ export namespace im {
 
                 /** TurmsResponse notification. */
                 public notification?: (im.turms.proto.ITurmsRequest|null);
+
+                /** TurmsResponse requesterId. */
+                public requesterId?: (google.protobuf.IInt64Value|null);
 
                 /**
                  * Encodes the specified TurmsResponse message. Does not implicitly {@link im.turms.proto.TurmsResponse.verify|verify} messages.

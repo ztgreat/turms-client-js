@@ -6832,7 +6832,6 @@ $root.im = (function() {
                  * @memberof im.turms.proto
                  * @interface ITurmsRequest
                  * @property {google.protobuf.IInt64Value|null} [requestId] TurmsRequest requestId
-                 * @property {google.protobuf.IInt64Value|null} [requesterId] TurmsRequest requesterId
                  * @property {im.turms.proto.IAckRequest|null} [ackRequest] TurmsRequest ackRequest
                  * @property {im.turms.proto.ICreateMessageRequest|null} [createMessageRequest] TurmsRequest createMessageRequest
                  * @property {im.turms.proto.IQueryMessageStatusesRequest|null} [queryMessageStatusesRequest] TurmsRequest queryMessageStatusesRequest
@@ -6909,14 +6908,6 @@ $root.im = (function() {
                  * @instance
                  */
                 TurmsRequest.prototype.requestId = null;
-
-                /**
-                 * TurmsRequest requesterId.
-                 * @member {google.protobuf.IInt64Value|null|undefined} requesterId
-                 * @memberof im.turms.proto.TurmsRequest
-                 * @instance
-                 */
-                TurmsRequest.prototype.requesterId = null;
 
                 /**
                  * TurmsRequest ackRequest.
@@ -7362,10 +7353,8 @@ $root.im = (function() {
                         writer = $Writer.create();
                     if (message.requestId != null && message.hasOwnProperty("requestId"))
                         $root.google.protobuf.Int64Value.encode(message.requestId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.requesterId != null && message.hasOwnProperty("requesterId"))
-                        $root.google.protobuf.Int64Value.encode(message.requesterId, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.ackRequest != null && message.hasOwnProperty("ackRequest"))
-                        $root.im.turms.proto.AckRequest.encode(message.ackRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.im.turms.proto.AckRequest.encode(message.ackRequest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.createMessageRequest != null && message.hasOwnProperty("createMessageRequest"))
                         $root.im.turms.proto.CreateMessageRequest.encode(message.createMessageRequest, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     if (message.queryMessageStatusesRequest != null && message.hasOwnProperty("queryMessageStatusesRequest"))
@@ -7493,9 +7482,6 @@ $root.im = (function() {
                             message.requestId = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
                             break;
                         case 2:
-                            message.requesterId = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
-                            break;
-                        case 3:
                             message.ackRequest = $root.im.turms.proto.AckRequest.decode(reader, reader.uint32());
                             break;
                         case 5:
@@ -10445,105 +10431,6 @@ $root.im = (function() {
                 return GroupMembersWithVersion;
             })();
 
-            proto.GroupWithVersion = (function() {
-
-                /**
-                 * Properties of a GroupWithVersion.
-                 * @memberof im.turms.proto
-                 * @interface IGroupWithVersion
-                 * @property {number|null} [lastUpdatedDate] GroupWithVersion lastUpdatedDate
-                 * @property {Array.<im.turms.proto.IGroup>|null} [group] GroupWithVersion group
-                 */
-
-                /**
-                 * Constructs a new GroupWithVersion.
-                 * @memberof im.turms.proto
-                 * @classdesc Represents a GroupWithVersion.
-                 * @implements IGroupWithVersion
-                 * @constructor
-                 * @param {im.turms.proto.IGroupWithVersion=} [properties] Properties to set
-                 */
-                function GroupWithVersion(properties) {
-                    this.group = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-
-                /**
-                 * GroupWithVersion lastUpdatedDate.
-                 * @member {number} lastUpdatedDate
-                 * @memberof im.turms.proto.GroupWithVersion
-                 * @instance
-                 */
-                GroupWithVersion.prototype.lastUpdatedDate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-                /**
-                 * GroupWithVersion group.
-                 * @member {Array.<im.turms.proto.IGroup>} group
-                 * @memberof im.turms.proto.GroupWithVersion
-                 * @instance
-                 */
-                GroupWithVersion.prototype.group = $util.emptyArray;
-
-                /**
-                 * Encodes the specified GroupWithVersion message. Does not implicitly {@link im.turms.proto.GroupWithVersion.verify|verify} messages.
-                 * @function encode
-                 * @memberof im.turms.proto.GroupWithVersion
-                 * @static
-                 * @param {im.turms.proto.IGroupWithVersion} message GroupWithVersion message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                GroupWithVersion.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.lastUpdatedDate != null && message.hasOwnProperty("lastUpdatedDate"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.lastUpdatedDate);
-                    if (message.group != null && message.group.length)
-                        for (var i = 0; i < message.group.length; ++i)
-                            $root.im.turms.proto.Group.encode(message.group[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    return writer;
-                };
-
-                /**
-                 * Decodes a GroupWithVersion message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof im.turms.proto.GroupWithVersion
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {im.turms.proto.GroupWithVersion} GroupWithVersion
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                GroupWithVersion.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.im.turms.proto.GroupWithVersion();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.lastUpdatedDate = reader.int64();
-                            break;
-                        case 2:
-                            if (!(message.group && message.group.length))
-                                message.group = [];
-                            message.group.push($root.im.turms.proto.Group.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-
-                return GroupWithVersion;
-            })();
-
             proto.GroupsWithVersion = (function() {
 
                 /**
@@ -10909,6 +10796,7 @@ $root.im = (function() {
                  * @property {google.protobuf.IStringValue|null} [reason] TurmsResponse reason
                  * @property {im.turms.proto.TurmsResponse.IData|null} [data] TurmsResponse data
                  * @property {im.turms.proto.ITurmsRequest|null} [notification] TurmsResponse notification
+                 * @property {google.protobuf.IInt64Value|null} [requesterId] TurmsResponse requesterId
                  */
 
                 /**
@@ -10967,6 +10855,14 @@ $root.im = (function() {
                 TurmsResponse.prototype.notification = null;
 
                 /**
+                 * TurmsResponse requesterId.
+                 * @member {google.protobuf.IInt64Value|null|undefined} requesterId
+                 * @memberof im.turms.proto.TurmsResponse
+                 * @instance
+                 */
+                TurmsResponse.prototype.requesterId = null;
+
+                /**
                  * Encodes the specified TurmsResponse message. Does not implicitly {@link im.turms.proto.TurmsResponse.verify|verify} messages.
                  * @function encode
                  * @memberof im.turms.proto.TurmsResponse
@@ -10988,6 +10884,8 @@ $root.im = (function() {
                         $root.im.turms.proto.TurmsResponse.Data.encode(message.data, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.notification != null && message.hasOwnProperty("notification"))
                         $root.im.turms.proto.TurmsRequest.encode(message.notification, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.requesterId != null && message.hasOwnProperty("requesterId"))
+                        $root.google.protobuf.Int64Value.encode(message.requesterId, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                     return writer;
                 };
 
@@ -11023,6 +10921,9 @@ $root.im = (function() {
                             break;
                         case 5:
                             message.notification = $root.im.turms.proto.TurmsRequest.decode(reader, reader.uint32());
+                            break;
+                        case 6:
+                            message.requesterId = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
