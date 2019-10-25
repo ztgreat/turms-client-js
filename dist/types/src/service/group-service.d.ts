@@ -14,9 +14,9 @@ export default class GroupService {
     queryGroup(groupId: number, lastUpdatedDate?: Date): Promise<Response.GroupWithVersion>;
     queryJoinedGroupsIds(lastUpdatedDate?: Date): Promise<number[]>;
     queryJoinedGroupsInfos(lastUpdatedDate?: Date): Promise<Response.GroupWithVersion>;
-    addGroupJoinQuestion(groupId: number, question: string, answers: string[]): Promise<number>;
+    addGroupJoinQuestion(groupId: number, question: string, answers: string[], score: number): Promise<number>;
     deleteGroupJoinQuestion(questionId: number): Promise<void>;
-    updateGroupJoinQuestion(questionId: number, question?: string, answers?: string[]): Promise<void>;
+    updateGroupJoinQuestion(questionId: number, question?: string, answers?: string[], score?: number): Promise<void>;
     blacklistUser(groupId: number, userId: number): Promise<void>;
     unblacklistUser(groupId: number, userId: number): Promise<void>;
     queryBlacklistedUsersIds(groupId: number, lastUpdatedDate?: Date): Promise<number[]>;
@@ -28,7 +28,9 @@ export default class GroupService {
     deleteJoinRequest(requestId: number): Promise<void>;
     queryJoinRequests(groupId: number, lastUpdatedDate?: Date): Promise<Response.GroupJoinRequestsWithVersion>;
     queryGroupJoinQuestionsRequest(groupId: number, withAnswers?: boolean, lastUpdatedDate?: Date): Promise<Response.GroupJoinQuestionsWithVersion>;
-    answerGroupQuestion(questionId: number, answer: string): Promise<boolean>;
+    answerGroupQuestions(questionIdsAndAnswers: {
+        [k: number]: string;
+    }): Promise<boolean>;
     addGroupMember(groupId: number, userId: number, name?: string, role?: string | GroupMemberRole, muteEndDate?: Date): Promise<void>;
     quitGroup(groupId: number, successorId?: number, quitAfterTransfer?: boolean): Promise<void>;
     removeGroupMember(groupId: number, memberId: number): Promise<void>;

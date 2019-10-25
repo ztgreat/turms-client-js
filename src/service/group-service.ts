@@ -120,13 +120,14 @@ export default class GroupService {
         });
     }
 
-    addGroupJoinQuestion(groupId: number, question: string, answers: string[]): Promise<number> {
-        RequestUtil.throwIfAnyFalsy(groupId, question, answers);
+    addGroupJoinQuestion(groupId: number, question: string, answers: string[], score: number): Promise<number> {
+        RequestUtil.throwIfAnyFalsy(groupId, question, answers, score);
         return this._turmsClient.driver.send({
             createGroupJoinQuestionRequest: {
                 groupId,
                 question,
-                answers
+                answers,
+                score
             }
         }).then(response => ResponseUtil.getFirstIdFromIds(response));
     }
@@ -140,14 +141,15 @@ export default class GroupService {
         }).then();
     }
 
-    updateGroupJoinQuestion(questionId: number, question?: string, answers?: string[]): Promise<void> {
+    updateGroupJoinQuestion(questionId: number, question?: string, answers?: string[], score?: number): Promise<void> {
         RequestUtil.throwIfAnyFalsy(questionId);
         RequestUtil.throwIfAllFalsy(question, answers);
         return this._turmsClient.driver.send({
             updateGroupJoinQuestionRequest: {
                 questionId: questionId,
                 question: RequestUtil.getIfNotNull(question),
-                answers: answers
+                answers: answers,
+                score: RequestUtil.getIfNotNull(score)
             }
         }).then();
     }
@@ -278,12 +280,11 @@ export default class GroupService {
         }).then(response => ResponseUtil.transform(response.data.groupJoinQuestionsWithVersion));
     }
 
-    answerGroupQuestion(questionId: number, answer: string): Promise<boolean> {
-        RequestUtil.throwIfAnyFalsy(questionId, answer);
+    answerGroupQuestions(questionIdsAndAnswers: { [k: number]: string }): Promise<boolean> {
+        RequestUtil.throwIfEmpty(questionIdsAndAnswers);
         return this._turmsClient.driver.send({
-            checkGroupJoinQuestionAnswerRequest: {
-                questionId,
-                answer
+            checkGroupJoinQuestionsAnswersRequest: {
+                questionIdAndAnswer: questionIdsAndAnswers
             }
         }).then(response => response.data.success.value);
     }

@@ -148,6 +148,7 @@ declare namespace Response {
         groupId?: number;
         question?: string;
         answers?: string;
+        score?: number;
     }
 
     interface GroupJoinQuestionsWithVersion {

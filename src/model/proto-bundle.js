@@ -1241,6 +1241,7 @@ $root.im = (function() {
                  * @property {google.protobuf.IInt64Value|null} [groupId] GroupJoinQuestion groupId
                  * @property {google.protobuf.IStringValue|null} [question] GroupJoinQuestion question
                  * @property {Array.<google.protobuf.IStringValue>|null} [answers] GroupJoinQuestion answers
+                 * @property {google.protobuf.IInt32Value|null} [score] GroupJoinQuestion score
                  */
 
                 /**
@@ -1292,6 +1293,14 @@ $root.im = (function() {
                 GroupJoinQuestion.prototype.answers = $util.emptyArray;
 
                 /**
+                 * GroupJoinQuestion score.
+                 * @member {google.protobuf.IInt32Value|null|undefined} score
+                 * @memberof im.turms.proto.GroupJoinQuestion
+                 * @instance
+                 */
+                GroupJoinQuestion.prototype.score = null;
+
+                /**
                  * Encodes the specified GroupJoinQuestion message. Does not implicitly {@link im.turms.proto.GroupJoinQuestion.verify|verify} messages.
                  * @function encode
                  * @memberof im.turms.proto.GroupJoinQuestion
@@ -1312,6 +1321,8 @@ $root.im = (function() {
                     if (message.answers != null && message.answers.length)
                         for (var i = 0; i < message.answers.length; ++i)
                             $root.google.protobuf.StringValue.encode(message.answers[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.score != null && message.hasOwnProperty("score"))
+                        $root.google.protobuf.Int32Value.encode(message.score, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
 
@@ -1346,6 +1357,9 @@ $root.im = (function() {
                             if (!(message.answers && message.answers.length))
                                 message.answers = [];
                             message.answers.push($root.google.protobuf.StringValue.decode(reader, reader.uint32()));
+                            break;
+                        case 5:
+                            message.score = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3965,25 +3979,25 @@ $root.im = (function() {
                 return DeleteGroupRequest;
             })();
 
-            proto.CheckGroupJoinQuestionAnswerRequest = (function() {
+            proto.CheckGroupJoinQuestionsAnswersRequest = (function() {
 
                 /**
-                 * Properties of a CheckGroupJoinQuestionAnswerRequest.
+                 * Properties of a CheckGroupJoinQuestionsAnswersRequest.
                  * @memberof im.turms.proto
-                 * @interface ICheckGroupJoinQuestionAnswerRequest
-                 * @property {number|null} [questionId] CheckGroupJoinQuestionAnswerRequest questionId
-                 * @property {string|null} [answer] CheckGroupJoinQuestionAnswerRequest answer
+                 * @interface ICheckGroupJoinQuestionsAnswersRequest
+                 * @property {Object.<string,string>|null} [questionIdAndAnswer] CheckGroupJoinQuestionsAnswersRequest questionIdAndAnswer
                  */
 
                 /**
-                 * Constructs a new CheckGroupJoinQuestionAnswerRequest.
+                 * Constructs a new CheckGroupJoinQuestionsAnswersRequest.
                  * @memberof im.turms.proto
-                 * @classdesc Represents a CheckGroupJoinQuestionAnswerRequest.
-                 * @implements ICheckGroupJoinQuestionAnswerRequest
+                 * @classdesc Represents a CheckGroupJoinQuestionsAnswersRequest.
+                 * @implements ICheckGroupJoinQuestionsAnswersRequest
                  * @constructor
-                 * @param {im.turms.proto.ICheckGroupJoinQuestionAnswerRequest=} [properties] Properties to set
+                 * @param {im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest=} [properties] Properties to set
                  */
-                function CheckGroupJoinQuestionAnswerRequest(properties) {
+                function CheckGroupJoinQuestionsAnswersRequest(properties) {
+                    this.questionIdAndAnswer = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -3991,63 +4005,56 @@ $root.im = (function() {
                 }
 
                 /**
-                 * CheckGroupJoinQuestionAnswerRequest questionId.
-                 * @member {number} questionId
-                 * @memberof im.turms.proto.CheckGroupJoinQuestionAnswerRequest
+                 * CheckGroupJoinQuestionsAnswersRequest questionIdAndAnswer.
+                 * @member {Object.<string,string>} questionIdAndAnswer
+                 * @memberof im.turms.proto.CheckGroupJoinQuestionsAnswersRequest
                  * @instance
                  */
-                CheckGroupJoinQuestionAnswerRequest.prototype.questionId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                CheckGroupJoinQuestionsAnswersRequest.prototype.questionIdAndAnswer = $util.emptyObject;
 
                 /**
-                 * CheckGroupJoinQuestionAnswerRequest answer.
-                 * @member {string} answer
-                 * @memberof im.turms.proto.CheckGroupJoinQuestionAnswerRequest
-                 * @instance
-                 */
-                CheckGroupJoinQuestionAnswerRequest.prototype.answer = "";
-
-                /**
-                 * Encodes the specified CheckGroupJoinQuestionAnswerRequest message. Does not implicitly {@link im.turms.proto.CheckGroupJoinQuestionAnswerRequest.verify|verify} messages.
+                 * Encodes the specified CheckGroupJoinQuestionsAnswersRequest message. Does not implicitly {@link im.turms.proto.CheckGroupJoinQuestionsAnswersRequest.verify|verify} messages.
                  * @function encode
-                 * @memberof im.turms.proto.CheckGroupJoinQuestionAnswerRequest
+                 * @memberof im.turms.proto.CheckGroupJoinQuestionsAnswersRequest
                  * @static
-                 * @param {im.turms.proto.ICheckGroupJoinQuestionAnswerRequest} message CheckGroupJoinQuestionAnswerRequest message or plain object to encode
+                 * @param {im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest} message CheckGroupJoinQuestionsAnswersRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CheckGroupJoinQuestionAnswerRequest.encode = function encode(message, writer) {
+                CheckGroupJoinQuestionsAnswersRequest.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.questionId != null && message.hasOwnProperty("questionId"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.questionId);
-                    if (message.answer != null && message.hasOwnProperty("answer"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.answer);
+                    if (message.questionIdAndAnswer != null && message.hasOwnProperty("questionIdAndAnswer"))
+                        for (var keys = Object.keys(message.questionIdAndAnswer), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 0 =*/8).int64(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.questionIdAndAnswer[keys[i]]).ldelim();
                     return writer;
                 };
 
                 /**
-                 * Decodes a CheckGroupJoinQuestionAnswerRequest message from the specified reader or buffer.
+                 * Decodes a CheckGroupJoinQuestionsAnswersRequest message from the specified reader or buffer.
                  * @function decode
-                 * @memberof im.turms.proto.CheckGroupJoinQuestionAnswerRequest
+                 * @memberof im.turms.proto.CheckGroupJoinQuestionsAnswersRequest
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {im.turms.proto.CheckGroupJoinQuestionAnswerRequest} CheckGroupJoinQuestionAnswerRequest
+                 * @returns {im.turms.proto.CheckGroupJoinQuestionsAnswersRequest} CheckGroupJoinQuestionsAnswersRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CheckGroupJoinQuestionAnswerRequest.decode = function decode(reader, length) {
+                CheckGroupJoinQuestionsAnswersRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.im.turms.proto.CheckGroupJoinQuestionAnswerRequest();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.im.turms.proto.CheckGroupJoinQuestionsAnswersRequest(), key;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            message.questionId = reader.int64();
-                            break;
-                        case 2:
-                            message.answer = reader.string();
+                            reader.skip().pos++;
+                            if (message.questionIdAndAnswer === $util.emptyObject)
+                                message.questionIdAndAnswer = {};
+                            key = reader.int64();
+                            reader.pos++;
+                            message.questionIdAndAnswer[typeof key === "object" ? $util.longToHash(key) : key] = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -4057,7 +4064,7 @@ $root.im = (function() {
                     return message;
                 };
 
-                return CheckGroupJoinQuestionAnswerRequest;
+                return CheckGroupJoinQuestionsAnswersRequest;
             })();
 
             proto.CreateGroupInvitationRequest = (function() {
@@ -4178,6 +4185,7 @@ $root.im = (function() {
                  * @property {number|null} [groupId] CreateGroupJoinQuestionRequest groupId
                  * @property {string|null} [question] CreateGroupJoinQuestionRequest question
                  * @property {Array.<string>|null} [answers] CreateGroupJoinQuestionRequest answers
+                 * @property {number|null} [score] CreateGroupJoinQuestionRequest score
                  */
 
                 /**
@@ -4221,6 +4229,14 @@ $root.im = (function() {
                 CreateGroupJoinQuestionRequest.prototype.answers = $util.emptyArray;
 
                 /**
+                 * CreateGroupJoinQuestionRequest score.
+                 * @member {number} score
+                 * @memberof im.turms.proto.CreateGroupJoinQuestionRequest
+                 * @instance
+                 */
+                CreateGroupJoinQuestionRequest.prototype.score = 0;
+
+                /**
                  * Encodes the specified CreateGroupJoinQuestionRequest message. Does not implicitly {@link im.turms.proto.CreateGroupJoinQuestionRequest.verify|verify} messages.
                  * @function encode
                  * @memberof im.turms.proto.CreateGroupJoinQuestionRequest
@@ -4239,6 +4255,8 @@ $root.im = (function() {
                     if (message.answers != null && message.answers.length)
                         for (var i = 0; i < message.answers.length; ++i)
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.answers[i]);
+                    if (message.score != null && message.hasOwnProperty("score"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.score);
                     return writer;
                 };
 
@@ -4270,6 +4288,9 @@ $root.im = (function() {
                             if (!(message.answers && message.answers.length))
                                 message.answers = [];
                             message.answers.push(reader.string());
+                            break;
+                        case 4:
+                            message.score = reader.int32();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -4928,6 +4949,7 @@ $root.im = (function() {
                  * @property {number|null} [questionId] UpdateGroupJoinQuestionRequest questionId
                  * @property {google.protobuf.IStringValue|null} [question] UpdateGroupJoinQuestionRequest question
                  * @property {Array.<string>|null} [answers] UpdateGroupJoinQuestionRequest answers
+                 * @property {google.protobuf.IInt32Value|null} [score] UpdateGroupJoinQuestionRequest score
                  */
 
                 /**
@@ -4971,6 +4993,14 @@ $root.im = (function() {
                 UpdateGroupJoinQuestionRequest.prototype.answers = $util.emptyArray;
 
                 /**
+                 * UpdateGroupJoinQuestionRequest score.
+                 * @member {google.protobuf.IInt32Value|null|undefined} score
+                 * @memberof im.turms.proto.UpdateGroupJoinQuestionRequest
+                 * @instance
+                 */
+                UpdateGroupJoinQuestionRequest.prototype.score = null;
+
+                /**
                  * Encodes the specified UpdateGroupJoinQuestionRequest message. Does not implicitly {@link im.turms.proto.UpdateGroupJoinQuestionRequest.verify|verify} messages.
                  * @function encode
                  * @memberof im.turms.proto.UpdateGroupJoinQuestionRequest
@@ -4989,6 +5019,8 @@ $root.im = (function() {
                     if (message.answers != null && message.answers.length)
                         for (var i = 0; i < message.answers.length; ++i)
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.answers[i]);
+                    if (message.score != null && message.hasOwnProperty("score"))
+                        $root.google.protobuf.Int32Value.encode(message.score, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     return writer;
                 };
 
@@ -5020,6 +5052,9 @@ $root.im = (function() {
                             if (!(message.answers && message.answers.length))
                                 message.answers = [];
                             message.answers.push(reader.string());
+                            break;
+                        case 4:
+                            message.score = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -6869,7 +6904,7 @@ $root.im = (function() {
                  * @property {im.turms.proto.IDeleteGroupBlacklistedUserRequest|null} [deleteGroupBlacklistedUserRequest] TurmsRequest deleteGroupBlacklistedUserRequest
                  * @property {im.turms.proto.IQueryGroupBlacklistedUsersIdsRequest|null} [queryGroupBlacklistedUsersIdsRequest] TurmsRequest queryGroupBlacklistedUsersIdsRequest
                  * @property {im.turms.proto.IQueryGroupBlacklistedUsersInfosRequest|null} [queryGroupBlacklistedUsersInfosRequest] TurmsRequest queryGroupBlacklistedUsersInfosRequest
-                 * @property {im.turms.proto.ICheckGroupJoinQuestionAnswerRequest|null} [checkGroupJoinQuestionAnswerRequest] TurmsRequest checkGroupJoinQuestionAnswerRequest
+                 * @property {im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest|null} [checkGroupJoinQuestionsAnswersRequest] TurmsRequest checkGroupJoinQuestionsAnswersRequest
                  * @property {im.turms.proto.ICreateGroupInvitationRequest|null} [createGroupInvitationRequest] TurmsRequest createGroupInvitationRequest
                  * @property {im.turms.proto.ICreateGroupJoinRequestRequest|null} [createGroupJoinRequestRequest] TurmsRequest createGroupJoinRequestRequest
                  * @property {im.turms.proto.ICreateGroupJoinQuestionRequest|null} [createGroupJoinQuestionRequest] TurmsRequest createGroupJoinQuestionRequest
@@ -7206,12 +7241,12 @@ $root.im = (function() {
                 TurmsRequest.prototype.queryGroupBlacklistedUsersInfosRequest = null;
 
                 /**
-                 * TurmsRequest checkGroupJoinQuestionAnswerRequest.
-                 * @member {im.turms.proto.ICheckGroupJoinQuestionAnswerRequest|null|undefined} checkGroupJoinQuestionAnswerRequest
+                 * TurmsRequest checkGroupJoinQuestionsAnswersRequest.
+                 * @member {im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest|null|undefined} checkGroupJoinQuestionsAnswersRequest
                  * @memberof im.turms.proto.TurmsRequest
                  * @instance
                  */
-                TurmsRequest.prototype.checkGroupJoinQuestionAnswerRequest = null;
+                TurmsRequest.prototype.checkGroupJoinQuestionsAnswersRequest = null;
 
                 /**
                  * TurmsRequest createGroupInvitationRequest.
@@ -7330,12 +7365,12 @@ $root.im = (function() {
 
                 /**
                  * TurmsRequest kind.
-                 * @member {"ackRequest"|"createMessageRequest"|"queryMessageStatusesRequest"|"queryMessagesRequest"|"queryPendingMessagesWithTotalRequest"|"updateMessageRequest"|"updateTypingStatusRequest"|"queryUserGroupInvitationsRequest"|"queryUserProfileRequest"|"queryUsersIdsNearbyRequest"|"queryUsersInfosNearbyRequest"|"queryUsersOnlineStatusRequest"|"updateUserLocationRequest"|"updateUserOnlineStatusRequest"|"updateUserRequest"|"createFriendRequestRequest"|"createRelationshipGroupRequest"|"createRelationshipRequest"|"deleteRelationshipGroupRequest"|"deleteRelationshipRequest"|"queryFriendRequestsRequest"|"queryRelatedUsersIdsRequest"|"queryRelationshipGroupsRequest"|"queryRelationshipsRequest"|"updateFriendRequestRequest"|"updateRelationshipGroupRequest"|"updateRelationshipRequest"|"createGroupRequest"|"deleteGroupRequest"|"queryGroupRequest"|"queryJoinedGroupsIdsRequest"|"queryJoinedGroupsInfosRequest"|"updateGroupRequest"|"createGroupBlacklistedUserRequest"|"deleteGroupBlacklistedUserRequest"|"queryGroupBlacklistedUsersIdsRequest"|"queryGroupBlacklistedUsersInfosRequest"|"checkGroupJoinQuestionAnswerRequest"|"createGroupInvitationRequest"|"createGroupJoinRequestRequest"|"createGroupJoinQuestionRequest"|"deleteGroupInvitationRequest"|"deleteGroupJoinRequestRequest"|"deleteGroupJoinQuestionRequest"|"queryGroupInvitationsRequest"|"queryGroupJoinRequestsRequest"|"queryGroupJoinQuestionsRequest"|"updateGroupJoinQuestionRequest"|"createGroupMemberRequest"|"deleteGroupMemberRequest"|"queryGroupMembersRequest"|"updateGroupMemberRequest"|undefined} kind
+                 * @member {"ackRequest"|"createMessageRequest"|"queryMessageStatusesRequest"|"queryMessagesRequest"|"queryPendingMessagesWithTotalRequest"|"updateMessageRequest"|"updateTypingStatusRequest"|"queryUserGroupInvitationsRequest"|"queryUserProfileRequest"|"queryUsersIdsNearbyRequest"|"queryUsersInfosNearbyRequest"|"queryUsersOnlineStatusRequest"|"updateUserLocationRequest"|"updateUserOnlineStatusRequest"|"updateUserRequest"|"createFriendRequestRequest"|"createRelationshipGroupRequest"|"createRelationshipRequest"|"deleteRelationshipGroupRequest"|"deleteRelationshipRequest"|"queryFriendRequestsRequest"|"queryRelatedUsersIdsRequest"|"queryRelationshipGroupsRequest"|"queryRelationshipsRequest"|"updateFriendRequestRequest"|"updateRelationshipGroupRequest"|"updateRelationshipRequest"|"createGroupRequest"|"deleteGroupRequest"|"queryGroupRequest"|"queryJoinedGroupsIdsRequest"|"queryJoinedGroupsInfosRequest"|"updateGroupRequest"|"createGroupBlacklistedUserRequest"|"deleteGroupBlacklistedUserRequest"|"queryGroupBlacklistedUsersIdsRequest"|"queryGroupBlacklistedUsersInfosRequest"|"checkGroupJoinQuestionsAnswersRequest"|"createGroupInvitationRequest"|"createGroupJoinRequestRequest"|"createGroupJoinQuestionRequest"|"deleteGroupInvitationRequest"|"deleteGroupJoinRequestRequest"|"deleteGroupJoinQuestionRequest"|"queryGroupInvitationsRequest"|"queryGroupJoinRequestsRequest"|"queryGroupJoinQuestionsRequest"|"updateGroupJoinQuestionRequest"|"createGroupMemberRequest"|"deleteGroupMemberRequest"|"queryGroupMembersRequest"|"updateGroupMemberRequest"|undefined} kind
                  * @memberof im.turms.proto.TurmsRequest
                  * @instance
                  */
                 Object.defineProperty(TurmsRequest.prototype, "kind", {
-                    get: $util.oneOfGetter($oneOfFields = ["ackRequest", "createMessageRequest", "queryMessageStatusesRequest", "queryMessagesRequest", "queryPendingMessagesWithTotalRequest", "updateMessageRequest", "updateTypingStatusRequest", "queryUserGroupInvitationsRequest", "queryUserProfileRequest", "queryUsersIdsNearbyRequest", "queryUsersInfosNearbyRequest", "queryUsersOnlineStatusRequest", "updateUserLocationRequest", "updateUserOnlineStatusRequest", "updateUserRequest", "createFriendRequestRequest", "createRelationshipGroupRequest", "createRelationshipRequest", "deleteRelationshipGroupRequest", "deleteRelationshipRequest", "queryFriendRequestsRequest", "queryRelatedUsersIdsRequest", "queryRelationshipGroupsRequest", "queryRelationshipsRequest", "updateFriendRequestRequest", "updateRelationshipGroupRequest", "updateRelationshipRequest", "createGroupRequest", "deleteGroupRequest", "queryGroupRequest", "queryJoinedGroupsIdsRequest", "queryJoinedGroupsInfosRequest", "updateGroupRequest", "createGroupBlacklistedUserRequest", "deleteGroupBlacklistedUserRequest", "queryGroupBlacklistedUsersIdsRequest", "queryGroupBlacklistedUsersInfosRequest", "checkGroupJoinQuestionAnswerRequest", "createGroupInvitationRequest", "createGroupJoinRequestRequest", "createGroupJoinQuestionRequest", "deleteGroupInvitationRequest", "deleteGroupJoinRequestRequest", "deleteGroupJoinQuestionRequest", "queryGroupInvitationsRequest", "queryGroupJoinRequestsRequest", "queryGroupJoinQuestionsRequest", "updateGroupJoinQuestionRequest", "createGroupMemberRequest", "deleteGroupMemberRequest", "queryGroupMembersRequest", "updateGroupMemberRequest"]),
+                    get: $util.oneOfGetter($oneOfFields = ["ackRequest", "createMessageRequest", "queryMessageStatusesRequest", "queryMessagesRequest", "queryPendingMessagesWithTotalRequest", "updateMessageRequest", "updateTypingStatusRequest", "queryUserGroupInvitationsRequest", "queryUserProfileRequest", "queryUsersIdsNearbyRequest", "queryUsersInfosNearbyRequest", "queryUsersOnlineStatusRequest", "updateUserLocationRequest", "updateUserOnlineStatusRequest", "updateUserRequest", "createFriendRequestRequest", "createRelationshipGroupRequest", "createRelationshipRequest", "deleteRelationshipGroupRequest", "deleteRelationshipRequest", "queryFriendRequestsRequest", "queryRelatedUsersIdsRequest", "queryRelationshipGroupsRequest", "queryRelationshipsRequest", "updateFriendRequestRequest", "updateRelationshipGroupRequest", "updateRelationshipRequest", "createGroupRequest", "deleteGroupRequest", "queryGroupRequest", "queryJoinedGroupsIdsRequest", "queryJoinedGroupsInfosRequest", "updateGroupRequest", "createGroupBlacklistedUserRequest", "deleteGroupBlacklistedUserRequest", "queryGroupBlacklistedUsersIdsRequest", "queryGroupBlacklistedUsersInfosRequest", "checkGroupJoinQuestionsAnswersRequest", "createGroupInvitationRequest", "createGroupJoinRequestRequest", "createGroupJoinQuestionRequest", "deleteGroupInvitationRequest", "deleteGroupJoinRequestRequest", "deleteGroupJoinQuestionRequest", "queryGroupInvitationsRequest", "queryGroupJoinRequestsRequest", "queryGroupJoinQuestionsRequest", "updateGroupJoinQuestionRequest", "createGroupMemberRequest", "deleteGroupMemberRequest", "queryGroupMembersRequest", "updateGroupMemberRequest"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
 
@@ -7427,8 +7462,8 @@ $root.im = (function() {
                         $root.im.turms.proto.QueryGroupBlacklistedUsersIdsRequest.encode(message.queryGroupBlacklistedUsersIdsRequest, writer.uint32(/* id 402, wireType 2 =*/3218).fork()).ldelim();
                     if (message.queryGroupBlacklistedUsersInfosRequest != null && message.hasOwnProperty("queryGroupBlacklistedUsersInfosRequest"))
                         $root.im.turms.proto.QueryGroupBlacklistedUsersInfosRequest.encode(message.queryGroupBlacklistedUsersInfosRequest, writer.uint32(/* id 403, wireType 2 =*/3226).fork()).ldelim();
-                    if (message.checkGroupJoinQuestionAnswerRequest != null && message.hasOwnProperty("checkGroupJoinQuestionAnswerRequest"))
-                        $root.im.turms.proto.CheckGroupJoinQuestionAnswerRequest.encode(message.checkGroupJoinQuestionAnswerRequest, writer.uint32(/* id 500, wireType 2 =*/4002).fork()).ldelim();
+                    if (message.checkGroupJoinQuestionsAnswersRequest != null && message.hasOwnProperty("checkGroupJoinQuestionsAnswersRequest"))
+                        $root.im.turms.proto.CheckGroupJoinQuestionsAnswersRequest.encode(message.checkGroupJoinQuestionsAnswersRequest, writer.uint32(/* id 500, wireType 2 =*/4002).fork()).ldelim();
                     if (message.createGroupInvitationRequest != null && message.hasOwnProperty("createGroupInvitationRequest"))
                         $root.im.turms.proto.CreateGroupInvitationRequest.encode(message.createGroupInvitationRequest, writer.uint32(/* id 501, wireType 2 =*/4010).fork()).ldelim();
                     if (message.createGroupJoinRequestRequest != null && message.hasOwnProperty("createGroupJoinRequestRequest"))
@@ -7593,7 +7628,7 @@ $root.im = (function() {
                             message.queryGroupBlacklistedUsersInfosRequest = $root.im.turms.proto.QueryGroupBlacklistedUsersInfosRequest.decode(reader, reader.uint32());
                             break;
                         case 500:
-                            message.checkGroupJoinQuestionAnswerRequest = $root.im.turms.proto.CheckGroupJoinQuestionAnswerRequest.decode(reader, reader.uint32());
+                            message.checkGroupJoinQuestionsAnswersRequest = $root.im.turms.proto.CheckGroupJoinQuestionsAnswersRequest.decode(reader, reader.uint32());
                             break;
                         case 501:
                             message.createGroupInvitationRequest = $root.im.turms.proto.CreateGroupInvitationRequest.decode(reader, reader.uint32());
@@ -10134,6 +10169,127 @@ $root.im = (function() {
                 return GroupInvitationsWithVersion;
             })();
 
+            proto.GroupJoinQuestionsAnswerResult = (function() {
+
+                /**
+                 * Properties of a GroupJoinQuestionsAnswerResult.
+                 * @memberof im.turms.proto
+                 * @interface IGroupJoinQuestionsAnswerResult
+                 * @property {number|null} [score] GroupJoinQuestionsAnswerResult score
+                 * @property {Array.<number>|null} [questionsIds] GroupJoinQuestionsAnswerResult questionsIds
+                 * @property {boolean|null} [joined] GroupJoinQuestionsAnswerResult joined
+                 */
+
+                /**
+                 * Constructs a new GroupJoinQuestionsAnswerResult.
+                 * @memberof im.turms.proto
+                 * @classdesc Represents a GroupJoinQuestionsAnswerResult.
+                 * @implements IGroupJoinQuestionsAnswerResult
+                 * @constructor
+                 * @param {im.turms.proto.IGroupJoinQuestionsAnswerResult=} [properties] Properties to set
+                 */
+                function GroupJoinQuestionsAnswerResult(properties) {
+                    this.questionsIds = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * GroupJoinQuestionsAnswerResult score.
+                 * @member {number} score
+                 * @memberof im.turms.proto.GroupJoinQuestionsAnswerResult
+                 * @instance
+                 */
+                GroupJoinQuestionsAnswerResult.prototype.score = 0;
+
+                /**
+                 * GroupJoinQuestionsAnswerResult questionsIds.
+                 * @member {Array.<number>} questionsIds
+                 * @memberof im.turms.proto.GroupJoinQuestionsAnswerResult
+                 * @instance
+                 */
+                GroupJoinQuestionsAnswerResult.prototype.questionsIds = $util.emptyArray;
+
+                /**
+                 * GroupJoinQuestionsAnswerResult joined.
+                 * @member {boolean} joined
+                 * @memberof im.turms.proto.GroupJoinQuestionsAnswerResult
+                 * @instance
+                 */
+                GroupJoinQuestionsAnswerResult.prototype.joined = false;
+
+                /**
+                 * Encodes the specified GroupJoinQuestionsAnswerResult message. Does not implicitly {@link im.turms.proto.GroupJoinQuestionsAnswerResult.verify|verify} messages.
+                 * @function encode
+                 * @memberof im.turms.proto.GroupJoinQuestionsAnswerResult
+                 * @static
+                 * @param {im.turms.proto.IGroupJoinQuestionsAnswerResult} message GroupJoinQuestionsAnswerResult message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GroupJoinQuestionsAnswerResult.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.score != null && message.hasOwnProperty("score"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.score);
+                    if (message.questionsIds != null && message.questionsIds.length) {
+                        writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                        for (var i = 0; i < message.questionsIds.length; ++i)
+                            writer.int64(message.questionsIds[i]);
+                        writer.ldelim();
+                    }
+                    if (message.joined != null && message.hasOwnProperty("joined"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.joined);
+                    return writer;
+                };
+
+                /**
+                 * Decodes a GroupJoinQuestionsAnswerResult message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof im.turms.proto.GroupJoinQuestionsAnswerResult
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {im.turms.proto.GroupJoinQuestionsAnswerResult} GroupJoinQuestionsAnswerResult
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GroupJoinQuestionsAnswerResult.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.im.turms.proto.GroupJoinQuestionsAnswerResult();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.score = reader.int32();
+                            break;
+                        case 2:
+                            if (!(message.questionsIds && message.questionsIds.length))
+                                message.questionsIds = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.questionsIds.push(reader.int64());
+                            } else
+                                message.questionsIds.push(reader.int64());
+                            break;
+                        case 3:
+                            message.joined = reader.bool();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                return GroupJoinQuestionsAnswerResult;
+            })();
+
             proto.GroupJoinQuestionsWithVersion = (function() {
 
                 /**
@@ -10952,6 +11108,7 @@ $root.im = (function() {
                      * @property {im.turms.proto.IUserRelationshipGroupsWithVersion|null} [userRelationshipGroupsWithVersion] Data userRelationshipGroupsWithVersion
                      * @property {im.turms.proto.IUserRelationshipsWithVersion|null} [userRelationshipsWithVersion] Data userRelationshipsWithVersion
                      * @property {im.turms.proto.IGroupInvitationsWithVersion|null} [groupInvitationsWithVersion] Data groupInvitationsWithVersion
+                     * @property {im.turms.proto.IGroupJoinQuestionsAnswerResult|null} [groupJoinQuestionAnswerResult] Data groupJoinQuestionAnswerResult
                      * @property {im.turms.proto.IGroupJoinRequestsWithVersion|null} [groupJoinRequestsWithVersion] Data groupJoinRequestsWithVersion
                      * @property {im.turms.proto.IGroupJoinQuestionsWithVersion|null} [groupJoinQuestionsWithVersion] Data groupJoinQuestionsWithVersion
                      * @property {im.turms.proto.IGroupMembersWithVersion|null} [groupMembersWithVersion] Data groupMembersWithVersion
@@ -11078,6 +11235,14 @@ $root.im = (function() {
                     Data.prototype.groupInvitationsWithVersion = null;
 
                     /**
+                     * Data groupJoinQuestionAnswerResult.
+                     * @member {im.turms.proto.IGroupJoinQuestionsAnswerResult|null|undefined} groupJoinQuestionAnswerResult
+                     * @memberof im.turms.proto.TurmsResponse.Data
+                     * @instance
+                     */
+                    Data.prototype.groupJoinQuestionAnswerResult = null;
+
+                    /**
                      * Data groupJoinRequestsWithVersion.
                      * @member {im.turms.proto.IGroupJoinRequestsWithVersion|null|undefined} groupJoinRequestsWithVersion
                      * @memberof im.turms.proto.TurmsResponse.Data
@@ -11114,12 +11279,12 @@ $root.im = (function() {
 
                     /**
                      * Data kind.
-                     * @member {"ids"|"idsWithVersion"|"success"|"acknowledge"|"messages"|"messageStatuses"|"messagesWithTotalList"|"usersInfosWithVersion"|"usersOnlineStatuses"|"userFriendRequestsWithVersion"|"userRelationshipGroupsWithVersion"|"userRelationshipsWithVersion"|"groupInvitationsWithVersion"|"groupJoinRequestsWithVersion"|"groupJoinQuestionsWithVersion"|"groupMembersWithVersion"|"groupsWithVersion"|undefined} kind
+                     * @member {"ids"|"idsWithVersion"|"success"|"acknowledge"|"messages"|"messageStatuses"|"messagesWithTotalList"|"usersInfosWithVersion"|"usersOnlineStatuses"|"userFriendRequestsWithVersion"|"userRelationshipGroupsWithVersion"|"userRelationshipsWithVersion"|"groupInvitationsWithVersion"|"groupJoinQuestionAnswerResult"|"groupJoinRequestsWithVersion"|"groupJoinQuestionsWithVersion"|"groupMembersWithVersion"|"groupsWithVersion"|undefined} kind
                      * @memberof im.turms.proto.TurmsResponse.Data
                      * @instance
                      */
                     Object.defineProperty(Data.prototype, "kind", {
-                        get: $util.oneOfGetter($oneOfFields = ["ids", "idsWithVersion", "success", "acknowledge", "messages", "messageStatuses", "messagesWithTotalList", "usersInfosWithVersion", "usersOnlineStatuses", "userFriendRequestsWithVersion", "userRelationshipGroupsWithVersion", "userRelationshipsWithVersion", "groupInvitationsWithVersion", "groupJoinRequestsWithVersion", "groupJoinQuestionsWithVersion", "groupMembersWithVersion", "groupsWithVersion"]),
+                        get: $util.oneOfGetter($oneOfFields = ["ids", "idsWithVersion", "success", "acknowledge", "messages", "messageStatuses", "messagesWithTotalList", "usersInfosWithVersion", "usersOnlineStatuses", "userFriendRequestsWithVersion", "userRelationshipGroupsWithVersion", "userRelationshipsWithVersion", "groupInvitationsWithVersion", "groupJoinQuestionAnswerResult", "groupJoinRequestsWithVersion", "groupJoinQuestionsWithVersion", "groupMembersWithVersion", "groupsWithVersion"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
 
@@ -11161,14 +11326,16 @@ $root.im = (function() {
                             $root.im.turms.proto.UserRelationshipsWithVersion.encode(message.userRelationshipsWithVersion, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         if (message.groupInvitationsWithVersion != null && message.hasOwnProperty("groupInvitationsWithVersion"))
                             $root.im.turms.proto.GroupInvitationsWithVersion.encode(message.groupInvitationsWithVersion, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                        if (message.groupJoinQuestionAnswerResult != null && message.hasOwnProperty("groupJoinQuestionAnswerResult"))
+                            $root.im.turms.proto.GroupJoinQuestionsAnswerResult.encode(message.groupJoinQuestionAnswerResult, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         if (message.groupJoinRequestsWithVersion != null && message.hasOwnProperty("groupJoinRequestsWithVersion"))
-                            $root.im.turms.proto.GroupJoinRequestsWithVersion.encode(message.groupJoinRequestsWithVersion, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            $root.im.turms.proto.GroupJoinRequestsWithVersion.encode(message.groupJoinRequestsWithVersion, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                         if (message.groupJoinQuestionsWithVersion != null && message.hasOwnProperty("groupJoinQuestionsWithVersion"))
-                            $root.im.turms.proto.GroupJoinQuestionsWithVersion.encode(message.groupJoinQuestionsWithVersion, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            $root.im.turms.proto.GroupJoinQuestionsWithVersion.encode(message.groupJoinQuestionsWithVersion, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                         if (message.groupMembersWithVersion != null && message.hasOwnProperty("groupMembersWithVersion"))
-                            $root.im.turms.proto.GroupMembersWithVersion.encode(message.groupMembersWithVersion, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            $root.im.turms.proto.GroupMembersWithVersion.encode(message.groupMembersWithVersion, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                         if (message.groupsWithVersion != null && message.hasOwnProperty("groupsWithVersion"))
-                            $root.im.turms.proto.GroupsWithVersion.encode(message.groupsWithVersion, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            $root.im.turms.proto.GroupsWithVersion.encode(message.groupsWithVersion, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                         return writer;
                     };
 
@@ -11230,15 +11397,18 @@ $root.im = (function() {
                                 message.groupInvitationsWithVersion = $root.im.turms.proto.GroupInvitationsWithVersion.decode(reader, reader.uint32());
                                 break;
                             case 14:
-                                message.groupJoinRequestsWithVersion = $root.im.turms.proto.GroupJoinRequestsWithVersion.decode(reader, reader.uint32());
+                                message.groupJoinQuestionAnswerResult = $root.im.turms.proto.GroupJoinQuestionsAnswerResult.decode(reader, reader.uint32());
                                 break;
                             case 15:
-                                message.groupJoinQuestionsWithVersion = $root.im.turms.proto.GroupJoinQuestionsWithVersion.decode(reader, reader.uint32());
+                                message.groupJoinRequestsWithVersion = $root.im.turms.proto.GroupJoinRequestsWithVersion.decode(reader, reader.uint32());
                                 break;
                             case 16:
-                                message.groupMembersWithVersion = $root.im.turms.proto.GroupMembersWithVersion.decode(reader, reader.uint32());
+                                message.groupJoinQuestionsWithVersion = $root.im.turms.proto.GroupJoinQuestionsWithVersion.decode(reader, reader.uint32());
                                 break;
                             case 17:
+                                message.groupMembersWithVersion = $root.im.turms.proto.GroupMembersWithVersion.decode(reader, reader.uint32());
+                                break;
+                            case 18:
                                 message.groupsWithVersion = $root.im.turms.proto.GroupsWithVersion.decode(reader, reader.uint32());
                                 break;
                             default:

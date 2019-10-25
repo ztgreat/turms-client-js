@@ -4,6 +4,7 @@ export default class RequestUtil {
     static getTimeIfNotNull(value: Date): any | undefined;
     private static isFalsy;
     private static isTruthy;
+    static throwIfEmpty(value: any): void;
     static throwIfAnyFalsy(...values: any[]): void;
     static throwIfAllFalsy(...values: any[]): void;
 }

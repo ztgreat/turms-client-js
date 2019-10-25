@@ -579,6 +579,9 @@ export namespace im {
 
                 /** GroupJoinQuestion answers */
                 answers?: (google.protobuf.IStringValue[]|null);
+
+                /** GroupJoinQuestion score */
+                score?: (google.protobuf.IInt32Value|null);
             }
 
             /** Represents a GroupJoinQuestion. */
@@ -601,6 +604,9 @@ export namespace im {
 
                 /** GroupJoinQuestion answers. */
                 public answers: google.protobuf.IStringValue[];
+
+                /** GroupJoinQuestion score. */
+                public score?: (google.protobuf.IInt32Value|null);
 
                 /**
                  * Encodes the specified GroupJoinQuestion message. Does not implicitly {@link im.turms.proto.GroupJoinQuestion.verify|verify} messages.
@@ -1787,48 +1793,42 @@ export namespace im {
                 public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): im.turms.proto.DeleteGroupRequest;
             }
 
-            /** Properties of a CheckGroupJoinQuestionAnswerRequest. */
-            interface ICheckGroupJoinQuestionAnswerRequest {
+            /** Properties of a CheckGroupJoinQuestionsAnswersRequest. */
+            interface ICheckGroupJoinQuestionsAnswersRequest {
 
-                /** CheckGroupJoinQuestionAnswerRequest questionId */
-                questionId?: (number|null);
-
-                /** CheckGroupJoinQuestionAnswerRequest answer */
-                answer?: (string|null);
+                /** CheckGroupJoinQuestionsAnswersRequest questionIdAndAnswer */
+                questionIdAndAnswer?: ({ [k: string]: string }|null);
             }
 
-            /** Represents a CheckGroupJoinQuestionAnswerRequest. */
-            class CheckGroupJoinQuestionAnswerRequest implements ICheckGroupJoinQuestionAnswerRequest {
+            /** Represents a CheckGroupJoinQuestionsAnswersRequest. */
+            class CheckGroupJoinQuestionsAnswersRequest implements ICheckGroupJoinQuestionsAnswersRequest {
 
                 /**
-                 * Constructs a new CheckGroupJoinQuestionAnswerRequest.
+                 * Constructs a new CheckGroupJoinQuestionsAnswersRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: im.turms.proto.ICheckGroupJoinQuestionAnswerRequest);
+                constructor(properties?: im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest);
 
-                /** CheckGroupJoinQuestionAnswerRequest questionId. */
-                public questionId: number;
-
-                /** CheckGroupJoinQuestionAnswerRequest answer. */
-                public answer: string;
+                /** CheckGroupJoinQuestionsAnswersRequest questionIdAndAnswer. */
+                public questionIdAndAnswer: { [k: string]: string };
 
                 /**
-                 * Encodes the specified CheckGroupJoinQuestionAnswerRequest message. Does not implicitly {@link im.turms.proto.CheckGroupJoinQuestionAnswerRequest.verify|verify} messages.
-                 * @param message CheckGroupJoinQuestionAnswerRequest message or plain object to encode
+                 * Encodes the specified CheckGroupJoinQuestionsAnswersRequest message. Does not implicitly {@link im.turms.proto.CheckGroupJoinQuestionsAnswersRequest.verify|verify} messages.
+                 * @param message CheckGroupJoinQuestionsAnswersRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: im.turms.proto.ICheckGroupJoinQuestionAnswerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a CheckGroupJoinQuestionAnswerRequest message from the specified reader or buffer.
+                 * Decodes a CheckGroupJoinQuestionsAnswersRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns CheckGroupJoinQuestionAnswerRequest
+                 * @returns CheckGroupJoinQuestionsAnswersRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): im.turms.proto.CheckGroupJoinQuestionAnswerRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): im.turms.proto.CheckGroupJoinQuestionsAnswersRequest;
             }
 
             /** Properties of a CreateGroupInvitationRequest. */
@@ -1892,6 +1892,9 @@ export namespace im {
 
                 /** CreateGroupJoinQuestionRequest answers */
                 answers?: (string[]|null);
+
+                /** CreateGroupJoinQuestionRequest score */
+                score?: (number|null);
             }
 
             /** Represents a CreateGroupJoinQuestionRequest. */
@@ -1911,6 +1914,9 @@ export namespace im {
 
                 /** CreateGroupJoinQuestionRequest answers. */
                 public answers: string[];
+
+                /** CreateGroupJoinQuestionRequest score. */
+                public score: number;
 
                 /**
                  * Encodes the specified CreateGroupJoinQuestionRequest message. Does not implicitly {@link im.turms.proto.CreateGroupJoinQuestionRequest.verify|verify} messages.
@@ -2238,6 +2244,9 @@ export namespace im {
 
                 /** UpdateGroupJoinQuestionRequest answers */
                 answers?: (string[]|null);
+
+                /** UpdateGroupJoinQuestionRequest score */
+                score?: (google.protobuf.IInt32Value|null);
             }
 
             /** Represents an UpdateGroupJoinQuestionRequest. */
@@ -2257,6 +2266,9 @@ export namespace im {
 
                 /** UpdateGroupJoinQuestionRequest answers. */
                 public answers: string[];
+
+                /** UpdateGroupJoinQuestionRequest score. */
+                public score?: (google.protobuf.IInt32Value|null);
 
                 /**
                  * Encodes the specified UpdateGroupJoinQuestionRequest message. Does not implicitly {@link im.turms.proto.UpdateGroupJoinQuestionRequest.verify|verify} messages.
@@ -3198,8 +3210,8 @@ export namespace im {
                 /** TurmsRequest queryGroupBlacklistedUsersInfosRequest */
                 queryGroupBlacklistedUsersInfosRequest?: (im.turms.proto.IQueryGroupBlacklistedUsersInfosRequest|null);
 
-                /** TurmsRequest checkGroupJoinQuestionAnswerRequest */
-                checkGroupJoinQuestionAnswerRequest?: (im.turms.proto.ICheckGroupJoinQuestionAnswerRequest|null);
+                /** TurmsRequest checkGroupJoinQuestionsAnswersRequest */
+                checkGroupJoinQuestionsAnswersRequest?: (im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest|null);
 
                 /** TurmsRequest createGroupInvitationRequest */
                 createGroupInvitationRequest?: (im.turms.proto.ICreateGroupInvitationRequest|null);
@@ -3367,8 +3379,8 @@ export namespace im {
                 /** TurmsRequest queryGroupBlacklistedUsersInfosRequest. */
                 public queryGroupBlacklistedUsersInfosRequest?: (im.turms.proto.IQueryGroupBlacklistedUsersInfosRequest|null);
 
-                /** TurmsRequest checkGroupJoinQuestionAnswerRequest. */
-                public checkGroupJoinQuestionAnswerRequest?: (im.turms.proto.ICheckGroupJoinQuestionAnswerRequest|null);
+                /** TurmsRequest checkGroupJoinQuestionsAnswersRequest. */
+                public checkGroupJoinQuestionsAnswersRequest?: (im.turms.proto.ICheckGroupJoinQuestionsAnswersRequest|null);
 
                 /** TurmsRequest createGroupInvitationRequest. */
                 public createGroupInvitationRequest?: (im.turms.proto.ICreateGroupInvitationRequest|null);
@@ -3413,7 +3425,7 @@ export namespace im {
                 public updateGroupMemberRequest?: (im.turms.proto.IUpdateGroupMemberRequest|null);
 
                 /** TurmsRequest kind. */
-                public kind?: ("ackRequest"|"createMessageRequest"|"queryMessageStatusesRequest"|"queryMessagesRequest"|"queryPendingMessagesWithTotalRequest"|"updateMessageRequest"|"updateTypingStatusRequest"|"queryUserGroupInvitationsRequest"|"queryUserProfileRequest"|"queryUsersIdsNearbyRequest"|"queryUsersInfosNearbyRequest"|"queryUsersOnlineStatusRequest"|"updateUserLocationRequest"|"updateUserOnlineStatusRequest"|"updateUserRequest"|"createFriendRequestRequest"|"createRelationshipGroupRequest"|"createRelationshipRequest"|"deleteRelationshipGroupRequest"|"deleteRelationshipRequest"|"queryFriendRequestsRequest"|"queryRelatedUsersIdsRequest"|"queryRelationshipGroupsRequest"|"queryRelationshipsRequest"|"updateFriendRequestRequest"|"updateRelationshipGroupRequest"|"updateRelationshipRequest"|"createGroupRequest"|"deleteGroupRequest"|"queryGroupRequest"|"queryJoinedGroupsIdsRequest"|"queryJoinedGroupsInfosRequest"|"updateGroupRequest"|"createGroupBlacklistedUserRequest"|"deleteGroupBlacklistedUserRequest"|"queryGroupBlacklistedUsersIdsRequest"|"queryGroupBlacklistedUsersInfosRequest"|"checkGroupJoinQuestionAnswerRequest"|"createGroupInvitationRequest"|"createGroupJoinRequestRequest"|"createGroupJoinQuestionRequest"|"deleteGroupInvitationRequest"|"deleteGroupJoinRequestRequest"|"deleteGroupJoinQuestionRequest"|"queryGroupInvitationsRequest"|"queryGroupJoinRequestsRequest"|"queryGroupJoinQuestionsRequest"|"updateGroupJoinQuestionRequest"|"createGroupMemberRequest"|"deleteGroupMemberRequest"|"queryGroupMembersRequest"|"updateGroupMemberRequest");
+                public kind?: ("ackRequest"|"createMessageRequest"|"queryMessageStatusesRequest"|"queryMessagesRequest"|"queryPendingMessagesWithTotalRequest"|"updateMessageRequest"|"updateTypingStatusRequest"|"queryUserGroupInvitationsRequest"|"queryUserProfileRequest"|"queryUsersIdsNearbyRequest"|"queryUsersInfosNearbyRequest"|"queryUsersOnlineStatusRequest"|"updateUserLocationRequest"|"updateUserOnlineStatusRequest"|"updateUserRequest"|"createFriendRequestRequest"|"createRelationshipGroupRequest"|"createRelationshipRequest"|"deleteRelationshipGroupRequest"|"deleteRelationshipRequest"|"queryFriendRequestsRequest"|"queryRelatedUsersIdsRequest"|"queryRelationshipGroupsRequest"|"queryRelationshipsRequest"|"updateFriendRequestRequest"|"updateRelationshipGroupRequest"|"updateRelationshipRequest"|"createGroupRequest"|"deleteGroupRequest"|"queryGroupRequest"|"queryJoinedGroupsIdsRequest"|"queryJoinedGroupsInfosRequest"|"updateGroupRequest"|"createGroupBlacklistedUserRequest"|"deleteGroupBlacklistedUserRequest"|"queryGroupBlacklistedUsersIdsRequest"|"queryGroupBlacklistedUsersInfosRequest"|"checkGroupJoinQuestionsAnswersRequest"|"createGroupInvitationRequest"|"createGroupJoinRequestRequest"|"createGroupJoinQuestionRequest"|"deleteGroupInvitationRequest"|"deleteGroupJoinRequestRequest"|"deleteGroupJoinQuestionRequest"|"queryGroupInvitationsRequest"|"queryGroupJoinRequestsRequest"|"queryGroupJoinQuestionsRequest"|"updateGroupJoinQuestionRequest"|"createGroupMemberRequest"|"deleteGroupMemberRequest"|"queryGroupMembersRequest"|"updateGroupMemberRequest");
 
                 /**
                  * Encodes the specified TurmsRequest message. Does not implicitly {@link im.turms.proto.TurmsRequest.verify|verify} messages.
@@ -4556,6 +4568,56 @@ export namespace im {
                 public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): im.turms.proto.GroupInvitationsWithVersion;
             }
 
+            /** Properties of a GroupJoinQuestionsAnswerResult. */
+            interface IGroupJoinQuestionsAnswerResult {
+
+                /** GroupJoinQuestionsAnswerResult score */
+                score?: (number|null);
+
+                /** GroupJoinQuestionsAnswerResult questionsIds */
+                questionsIds?: (number[]|null);
+
+                /** GroupJoinQuestionsAnswerResult joined */
+                joined?: (boolean|null);
+            }
+
+            /** Represents a GroupJoinQuestionsAnswerResult. */
+            class GroupJoinQuestionsAnswerResult implements IGroupJoinQuestionsAnswerResult {
+
+                /**
+                 * Constructs a new GroupJoinQuestionsAnswerResult.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: im.turms.proto.IGroupJoinQuestionsAnswerResult);
+
+                /** GroupJoinQuestionsAnswerResult score. */
+                public score: number;
+
+                /** GroupJoinQuestionsAnswerResult questionsIds. */
+                public questionsIds: number[];
+
+                /** GroupJoinQuestionsAnswerResult joined. */
+                public joined: boolean;
+
+                /**
+                 * Encodes the specified GroupJoinQuestionsAnswerResult message. Does not implicitly {@link im.turms.proto.GroupJoinQuestionsAnswerResult.verify|verify} messages.
+                 * @param message GroupJoinQuestionsAnswerResult message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: im.turms.proto.IGroupJoinQuestionsAnswerResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GroupJoinQuestionsAnswerResult message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GroupJoinQuestionsAnswerResult
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): im.turms.proto.GroupJoinQuestionsAnswerResult;
+            }
+
             /** Properties of a GroupJoinQuestionsWithVersion. */
             interface IGroupJoinQuestionsWithVersion {
 
@@ -4958,6 +5020,9 @@ export namespace im {
                     /** Data groupInvitationsWithVersion */
                     groupInvitationsWithVersion?: (im.turms.proto.IGroupInvitationsWithVersion|null);
 
+                    /** Data groupJoinQuestionAnswerResult */
+                    groupJoinQuestionAnswerResult?: (im.turms.proto.IGroupJoinQuestionsAnswerResult|null);
+
                     /** Data groupJoinRequestsWithVersion */
                     groupJoinRequestsWithVersion?: (im.turms.proto.IGroupJoinRequestsWithVersion|null);
 
@@ -5019,6 +5084,9 @@ export namespace im {
                     /** Data groupInvitationsWithVersion. */
                     public groupInvitationsWithVersion?: (im.turms.proto.IGroupInvitationsWithVersion|null);
 
+                    /** Data groupJoinQuestionAnswerResult. */
+                    public groupJoinQuestionAnswerResult?: (im.turms.proto.IGroupJoinQuestionsAnswerResult|null);
+
                     /** Data groupJoinRequestsWithVersion. */
                     public groupJoinRequestsWithVersion?: (im.turms.proto.IGroupJoinRequestsWithVersion|null);
 
@@ -5032,7 +5100,7 @@ export namespace im {
                     public groupsWithVersion?: (im.turms.proto.IGroupsWithVersion|null);
 
                     /** Data kind. */
-                    public kind?: ("ids"|"idsWithVersion"|"success"|"acknowledge"|"messages"|"messageStatuses"|"messagesWithTotalList"|"usersInfosWithVersion"|"usersOnlineStatuses"|"userFriendRequestsWithVersion"|"userRelationshipGroupsWithVersion"|"userRelationshipsWithVersion"|"groupInvitationsWithVersion"|"groupJoinRequestsWithVersion"|"groupJoinQuestionsWithVersion"|"groupMembersWithVersion"|"groupsWithVersion");
+                    public kind?: ("ids"|"idsWithVersion"|"success"|"acknowledge"|"messages"|"messageStatuses"|"messagesWithTotalList"|"usersInfosWithVersion"|"usersOnlineStatuses"|"userFriendRequestsWithVersion"|"userRelationshipGroupsWithVersion"|"userRelationshipsWithVersion"|"groupInvitationsWithVersion"|"groupJoinQuestionAnswerResult"|"groupJoinRequestsWithVersion"|"groupJoinQuestionsWithVersion"|"groupMembersWithVersion"|"groupsWithVersion");
 
                     /**
                      * Encodes the specified Data message. Does not implicitly {@link im.turms.proto.TurmsResponse.Data.verify|verify} messages.

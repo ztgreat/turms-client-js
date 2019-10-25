@@ -1,5 +1,4 @@
 import {google} from "../model/proto-bundle";
-import Int64Value = google.protobuf.Int64Value;
 
 export default class RequestUtil {
     static ERROR = new Error("Illegal parameters");
@@ -22,6 +21,12 @@ export default class RequestUtil {
 
     private static isTruthy(value: any): boolean {
         return !this.isFalsy(value);
+    }
+
+    static throwIfEmpty(value): void {
+        if (Object.keys(value).length === 0) {
+            throw this.ERROR;
+        }
     }
 
     static throwIfAnyFalsy(...values: any[]): void {
